@@ -17,4 +17,5 @@ Grab any ip quickly
 
 ## How it works
 
-
+- Host the grep.php and logger.php
+- 
