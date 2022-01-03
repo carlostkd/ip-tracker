@@ -1,2 +1,2 @@
-# ip-tracker
+# Ip-tracker
 Grab any ip quickly
