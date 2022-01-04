@@ -18,8 +18,8 @@ Grab any ip quickly
 
 ## How it works
 
-- Host 
-- On the logger add your redirection url and your webhook.
+- Host the grep.php file.
+- On logger.php add your webhook link and redirection (leave empty for no redirection.
 - Send the grep.php you can use any URL shortener to mask the file.
 - Done.
 
