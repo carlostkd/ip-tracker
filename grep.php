@@ -6,7 +6,7 @@
 
 
 
-        $webhookurl = "https://untraceable.ch/.web/hook.php";
+        $webhookurl = "";
 
 
 
