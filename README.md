@@ -23,3 +23,5 @@ Grab any ip quickly
 - Send the grep.php you can use any URL shortener to mask the file.
 - Done.
 
+<img src="https://forthebadge.com/images/badges/ages-18.svg">
+
