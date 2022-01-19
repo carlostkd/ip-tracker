@@ -24,4 +24,5 @@ Grab any ip quickly
 - Done.
 
 <img src="https://forthebadge.com/images/badges/ages-18.svg">
+<img src="https://forthebadge.com/images/badges/makes-people-smile.svg">
 
